@@ -34,7 +34,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.multi
-      target: prod-build
+      target: client-build
     container_name: LibreChat-NGINX
     ports:
       - 80:80
@@ -88,7 +88,5 @@ services:
     depends_on:
       - vectordb
     env_file:
-      - .env
-
 volumes:
   pgdata2:
