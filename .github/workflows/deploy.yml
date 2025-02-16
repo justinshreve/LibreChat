@@ -16,14 +16,13 @@ jobs:
         with:
           key: ${{ secrets.DO_SSH_KEY }}
           known_hosts: unnecessary
+          name: librechat_deploy  # Match our new key name
           if_key_exists: replace
 
       - name: Debug SSH Setup
         run: |
           echo "SSH directory contents:"
           ls -la ~/.ssh/
-          echo "Current SSH keys:"
-          ssh-add -l || true
           echo "SSH key permissions:"
           stat ~/.ssh/*
 
@@ -33,12 +32,12 @@ jobs:
       - name: Test SSH Connection
         run: |
           echo "Testing SSH with verbose output..."
-          ssh -v ${{ secrets.DO_USER }}@${{ secrets.DO_HOST }} 'echo "Connection successful"'
+          ssh -v -i ~/.ssh/librechat_deploy ${{ secrets.DO_USER }}@${{ secrets.DO_HOST }} 'echo "Connection successful"'
 
       - name: Deploy to DigitalOcean
         if: success()
         run: |
-          ssh ${{ secrets.DO_USER }}@${{ secrets.DO_HOST }} '
+          ssh -i ~/.ssh/librechat_deploy ${{ secrets.DO_USER }}@${{ secrets.DO_HOST }} '
             cd /home/ember/LibreChat &&
             git fetch origin production &&
             git checkout production &&
