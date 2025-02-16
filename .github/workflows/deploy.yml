@@ -24,7 +24,7 @@ jobs:
       - name: Deploy to DigitalOcean
         run: |
           ssh ${{ secrets.DO_USER }}@${{ secrets.DO_HOST }} '
-            cd ~/LibreChat &&
+            cd /home/ember/LibreChat &&
             git fetch origin production &&
             git checkout production &&
             git pull origin production &&
