@@ -49,9 +49,6 @@ const App = () => {
 export default () => (
   <ScreenshotProvider>
     <App />
-    <div className="fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-[1001]">
-      Deployed at {new Date().toLocaleString()}!
-    </div>
     <iframe
       src="/assets/silence.mp3"
       allow="autoplay"
