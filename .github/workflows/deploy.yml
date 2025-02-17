@@ -35,5 +35,6 @@ jobs:
           key: ${{ secrets.DO_SSH_KEY }}
           script: |
             cd ~/LibreChat
-            echo "REGISTRY=registry.digitalocean.com/${{ secrets.DO_REGISTRY }}" > .env.registry
-            docker compose -f deploy-compose.yml --env-file .env --env-file .env.registry up -d
+            echo "REGISTRY=registry.digitalocean.com/${{ secrets.DO_REGISTRY }}" >> .env
+            cat .env
+            docker compose -f ./deploy-compose.yml up -d
