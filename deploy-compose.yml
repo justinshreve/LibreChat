@@ -68,7 +68,6 @@ services:
       - MEILI_NO_ANALYTICS=true
     volumes:
       - ./meili_data_v1.12:/meili_data
-
   vectordb:
     image: ankane/pgvector:latest
     environment:
@@ -78,7 +77,6 @@ services:
     restart: always
     volumes:
       - pgdata2:/var/lib/postgresql/data
-
   rag_api:
     image: ghcr.io/danny-avila/librechat-rag-api-dev-lite:latest
     environment:
@@ -88,5 +86,6 @@ services:
     depends_on:
       - vectordb
     env_file:
+      - .env
 volumes:
   pgdata2:
