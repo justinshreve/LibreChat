@@ -1,9 +1,9 @@
-import path, { resolve } from 'path';
 import react from '@vitejs/plugin-react';
-import { VitePWA } from 'vite-plugin-pwa';
-import { defineConfig, createLogger } from 'vite';
-import { nodePolyfills } from 'vite-plugin-node-polyfills';
+import path, { resolve } from 'path';
 import type { Plugin } from 'vite';
+import { createLogger, defineConfig } from 'vite';
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
+import { VitePWA } from 'vite-plugin-pwa';
 
 const logger = createLogger();
 const originalWarning = logger.warn;
@@ -62,7 +62,7 @@ export default defineConfig({
       useCredentials: true,
       workbox: {
         globPatterns: ['assets/**/*.{png,jpg,svg,ico}', '**/*.{js,css,html,ico,woff2}'],
-        maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
         navigateFallbackDenylist: [/^\/oauth/],
       },
       manifest: {
