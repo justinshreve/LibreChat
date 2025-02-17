@@ -88,6 +88,5 @@ services:
       - vectordb
     env_file:
       - .env
-
 volumes:
   pgdata2:
