@@ -1,9 +1,9 @@
-import path, { resolve } from 'path';
 import react from '@vitejs/plugin-react';
-import { VitePWA } from 'vite-plugin-pwa';
-import { defineConfig, createLogger } from 'vite';
-import { nodePolyfills } from 'vite-plugin-node-polyfills';
+import path, { resolve } from 'path';
 import type { Plugin } from 'vite';
+import { createLogger, defineConfig } from 'vite';
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
+import { VitePWA } from 'vite-plugin-pwa';
 
 const logger = createLogger();
 const originalWarning = logger.warn;
@@ -103,8 +103,15 @@ export default defineConfig({
   build: {
     sourcemap: process.env.NODE_ENV === 'development',
     outDir: './dist',
+    emptyOutDir: true,
+    cssCodeSplit: false,
+    manifest: true,
+    // Force clean builds
+    write: true,
+    modulePreload: {
+      polyfill: true
+    },
     rollupOptions: {
-      // external: ['uuid'],
       output: {
         manualChunks: (id) => {
           if (id.includes('node_modules/highlight.js')) {
