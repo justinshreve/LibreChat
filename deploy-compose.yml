@@ -32,7 +32,7 @@ services:
       - ./logs:/app/api/logs
 
   client:
-    image: nginx:1.27.0-alpine
+    image: ${REGISTRY}/librechat-client:latest
     container_name: LibreChat-NGINX
     ports:
       - 80:80
@@ -87,3 +87,7 @@ services:
     depends_on:
       - vectordb
     env_file:
+      - .env
+
+volumes:
+  pgdata2:
